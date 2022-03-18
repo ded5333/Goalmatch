@@ -46,25 +46,14 @@ class MainVM : ViewModel() {
                         var allMatches: MainFootball = response.body()!!
                         var mat = allMatches.response
 
-                        val data = mat[0].videos[0].embed
-
-                        val resultStr: String =
-                            data.substring(data.indexOf("'http") + 1, data.indexOf("' f"))
-
                         isInternet = true
                         _mutableEmplLiveIntermet.value = isInternet
 
-
-
-
                         _mutableEmplLiveData.value = mat
-                        for (match in mat) {
-                            Log.d("TAG", "onResponse: " + mat.get(0).competition)
-                        }
+
                     }
 
                     override fun onFailure(call: Call<MainFootball>, t: Throwable) {
-                        TODO("Not yet implemented")
                     }
 
                 })
@@ -88,7 +77,6 @@ class MainVM : ViewModel() {
             _mutableEmplLiveIntermet.value = isInternet
 
         } else {
-            // if the android version is below M
             @Suppress("DEPRECATION") val networkInfo =
                 connectivityManager.activeNetworkInfo ?: return false
             @Suppress("DEPRECATION")

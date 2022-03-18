@@ -9,6 +9,7 @@ import com.ded.goalmatch.mainfragment.ui.main.MainFragment
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,7 +75,8 @@ class MainActivity : AppCompatActivity() {
     fun loadInterstitialAd() {
         val adRequest1 = AdRequest.Builder().build()
         var adKey = "ca-app-pub-4433493293018663/9790359990"
-    //    if (BuildConfig.DEBUG) adKey = " ca-app-pub-3940256099942544/1033173712"
+  //      var adKey = "ca-app-pub-3940256099942544/1033173712"
+//        if (BuildConfig.DEBUG) adKey = "ca-app-pub-3940256099942544/1033173712"
         InterstitialAd.load(this, adKey, adRequest1,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -117,8 +119,9 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
                     // Handle the error
-                    Log.i("TAG", loadAdError.message)
+                    Log.d("TAG", loadAdError.message + "error")
                     mInterstitialAd = null
+
                 }
             })
 
@@ -130,5 +133,12 @@ class MainActivity : AppCompatActivity() {
             mInterstitialAd!!.show(this)
             loadInterstitialAd()
         }
+        else{
+            Log.d("TAG", "showAd:  null" )
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(resultStr)
+            startActivity(i)
+        }
+
     }
 }

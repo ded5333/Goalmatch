@@ -64,9 +64,9 @@ class MainFragment : Fragment() {
 
         DialogUtils.showDialog(
             requireContext(),
-            "Internet Connection",
-            "Please,check your internet connection",
-            "Ok",
+            getString(R.string.internet_connection),
+            getString(R.string.check_your_internet_connection),
+            getString(R.string.ok),
 
             yesClickListener = { dialog, which ->
                 dialog.dismiss()
